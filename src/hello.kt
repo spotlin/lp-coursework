@@ -1,3 +1,7 @@
+fun greetKotlin(name: String, greetingMsg: String = "Welcome") {
+    println("$greetingMsg, $name");
+}
+
 fun main () {
-    println("oh, hi kotlin!")
+    greetKotlin("Kotlin")
 }
