@@ -7,6 +7,11 @@ fun laugh() {
     println(10 times "k")
 }
 
+fun measureStr(str: String): Unit {
+    val letters: Int = strLength(str)
+    println("The string '$str' has $letters letters")
+}
+
 fun strLength(str: String): Int {                   // 7
     return str.length
 }
@@ -14,11 +19,5 @@ fun strLength(str: String): Int {                   // 7
 fun main () {
 //    greetKotlin("Kotlin")
 //    laugh()
-
-    var nullableString: String? = null
-    var notNullableString: String = "Oh well!"
-
-    println(strLength(notNullableString)) // works
-//    println(strLength(nullableString)) // doesn't work
-
+//    measureStr(("Ok Kotlin"))
 }
