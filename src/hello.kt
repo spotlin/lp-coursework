@@ -7,18 +7,18 @@ fun laugh() {
     println(10 times "k")
 }
 
+fun strLength(str: String): Int {                   // 7
+    return str.length
+}
 
 fun main () {
 //    greetKotlin("Kotlin")
 //    laugh()
 
-    // var is mutable
-    // val is immutable
+    var nullableString: String? = null
+    var notNullableString: String = "Oh well!"
 
-    var x1: Int = 1
-    val x2: Int = 2
-    val x3 = 3
-
-    println("$x1 $x2 $x3")
+    println(strLength(notNullableString)) // works
+//    println(strLength(nullableString)) // doesn't work
 
 }
