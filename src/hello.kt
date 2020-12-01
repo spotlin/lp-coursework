@@ -16,14 +16,27 @@ fun strLength(str: String): Int {                   // 7
     return str.length
 }
 
-class User (var id: Int, var email: String)
+class User (var id: Int, var name: String, var email: String) {
+    fun getUserId(): Int {
+        return this.id
+    }
+
+    fun getUserEmail(): String {
+        return this.email
+    }
+
+    fun setUserEmail(newEmail: String): Unit {
+        this.email = newEmail
+    }
+}
 
 fun main () {
 //    greetKotlin("Kotlin")
 //    laugh()
 //    measureStr(("Ok Kotlin")
 
-    val user1 = User(1, "dan@dan.com")
-    println("${user1.id}: ${user1.email}")
+    val user1 = User(1, "Daniel", "dan@ufes.com")
+    val email = user1.getUserEmail()
+    println("You're trying to tire me: $email")
 
 }
