@@ -30,13 +30,38 @@ class User (var id: Int, var name: String, var email: String) {
     }
 }
 
+open class Animal {
+    open fun greet() {
+        println("*pet sounds*")
+    }
+}
+
+class Dog : Animal() {
+    override fun greet() {
+        println("wow wow!")
+    }
+}
+
+class Cat : Animal() {
+    override fun greet() {
+        println("meowww")
+    }
+}
+
+// TODO: what does the fox say?
+
 fun main () {
 //    greetKotlin("Kotlin")
 //    laugh()
 //    measureStr(("Ok Kotlin")
 
-    val user1 = User(1, "Daniel", "dan@ufes.com")
-    val email = user1.getUserEmail()
-    println("You're trying to tire me: $email")
+//    val user1 = User(1, "Daniel", "dan@ufes.com")
+//    val email = user1.getUserEmail()
+
+    val doggo: Animal = Dog()
+    doggo.greet()
+
+    val kitty: Animal = Cat()
+    kitty.greet()
 
 }
