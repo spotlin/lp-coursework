@@ -58,10 +58,14 @@ fun main () {
 //    val user1 = User(1, "Daniel", "dan@ufes.com")
 //    val email = user1.getUserEmail()
 
-    val doggo: Animal = Dog()
-    doggo.greet()
+//    val doggo: Animal = Dog()
+//    doggo.greet()
+//
+//    val kitty: Animal = Cat()
+//    kitty.greet()
 
-    val kitty: Animal = Cat()
-    kitty.greet()
+    val spotlin = StreamingPlatform("Spotlin")
+
+    println(spotlin.getPlatformName())
 
 }
