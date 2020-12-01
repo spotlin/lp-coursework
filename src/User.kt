@@ -1,4 +1,4 @@
-class User (var username: String, var usercode: Int){
+open class User (var username: String, var userID: Int){
     fun getUserName(): String {
         return this.username;
     }
@@ -7,3 +7,4 @@ class User (var username: String, var usercode: Int){
         this.username = newUsername
     }
 }
+

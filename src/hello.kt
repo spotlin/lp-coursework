@@ -5,4 +5,7 @@ fun main () {
     val myUser = User("Orion", 1)
     println(myUser.getUserName())
 
+    val mySubscriber = Subscriber("Andromeda", 2)
+    mySubscriber.favorites()
+    println(mySubscriber.getUserName())
 }
