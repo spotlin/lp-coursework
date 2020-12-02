@@ -10,6 +10,6 @@ fun main () {
     mySubscriber.printFavorites()
 
 
-    val newMedia = Song("Get Lucky", 1, 1.2, 2013)
+    val newMedia = Song("Get Lucky", 1, 1.2, 2013, "Pop")
 
 }

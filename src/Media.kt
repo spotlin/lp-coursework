@@ -6,5 +6,7 @@ open class Media(protected var title: String, protected var mediaID: Int, protec
 
     init {
         counter++
+        println("Media #$counter")
+        println("Media name: ${this.title}")
     }
 }
