@@ -4,12 +4,15 @@ fun main () {
 
     val mySubscriber = Subscriber("Andromeda", 2)
     println("#1 Subscriber is ${mySubscriber.getUserName()}")
-    mySubscriber.addFavorite("Strawberry Fields Forever")
+    val getLucky = Song("Get Lucky", 1, 1.2, 2013, "Pop")
+    val digitalL = Song("Digital Love", 1, 1.2, 2013, "Pop")
+
+    mySubscriber.addFavorite(getLucky)
+    mySubscriber.addFavorite(digitalL)
 
     println("${mySubscriber.getUserName()} favorites: ")
     mySubscriber.printFavorites()
 
 
-    val newMedia = Song("Get Lucky", 1, 1.2, 2013, "Pop")
 
 }
