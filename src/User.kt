@@ -1,4 +1,4 @@
-open class User (var username: String, var userID: Int){
+open class User (protected var username: String, protected var userID: Int){
     fun getUserName(): String {
         return this.username;
     }
