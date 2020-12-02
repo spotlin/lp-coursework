@@ -3,17 +3,19 @@ fun main () {
     println("Welcome to ${ spotlin.getPlatformName() }")
 
     val orion = Subscriber("Orion", 1)
-    val andromeda = Subscriber("Andromeda", 2)
-    val pleiades = Subscriber("Pleiades", 3)
-
     spotlin.addUser(orion)
-    spotlin.addUser(andromeda)
-    spotlin.addUser(pleiades)
+//    spotlin.listUsers()
 
-    spotlin.listUsers()
+    val getLucky = Song("Get Lucky", 1, 1.2, 2013, "Pop")
+    val digitalLove = Song("Digital Love", 1, 1.2, 2013, "Pop")
+    val somethingBoutUs = Song("Something About Us", 1, 1.2, 2013, "Pop")
+    spotlin.addMedia(getLucky)
+    spotlin.addMedia(digitalLove)
+    spotlin.addMedia(somethingBoutUs)
+    spotlin.listMedia()
 
 //    println("#1 Subscriber is ${mySubscriber.getUserName()}")
-//    val getLucky = Song("Get Lucky", 1, 1.2, 2013, "Pop")
+//
 //
 //    mySubscriber.addFavorite(getLucky)
 //
