@@ -8,7 +8,7 @@ class Subscriber (username: String, userID: Int): User (username = username, use
             }
         }
 
-    fun addFavorites(newFavorite: String): Unit {
+    fun addFavorite(newFavorite: String): Unit {
         favorites.add(newFavorite)
     }
 }
