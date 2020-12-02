@@ -2,17 +2,16 @@ fun main () {
     val spotlin = StreamingPlatform("Spotlin")
     println("Welcome to ${ spotlin.getPlatformName() }")
 
-    val orion = Subscriber("Orion", 1)
-    spotlin.addUser(orion)
+    val user1 = Subscriber("Orion", 1)
+    spotlin.addUser(user1)
 //    spotlin.listUsers()
 
-    val getLucky = Song("Get Lucky", 1, 1.2, 2013, "Pop")
-    val digitalLove = Song("Digital Love", 1, 1.2, 2013, "Pop")
-    val somethingBoutUs = Song("Something About Us", 1, 1.2, 2013, "Pop")
-    spotlin.addMedia(getLucky)
-    spotlin.addMedia(digitalLove)
-    spotlin.addMedia(somethingBoutUs)
+    val pop = Genre("Pop", "PO")
+
+    val media1 = Song("Get Lucky", 1, 1.2, 2013, pop)
+    spotlin.addMedia(media1)
     spotlin.listMedia()
+
 
 //    println("#1 Subscriber is ${mySubscriber.getUserName()}")
 //
