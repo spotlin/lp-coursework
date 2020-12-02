@@ -1,7 +1,11 @@
 open class Media(protected var title: String, protected var mediaID: Int, protected var mediaLength: Double, protected var releaseYear: Int ){
-    private var counter : Int = 0
+    // Replaces Java static keyword
+    companion object {
+        var counter : Int = 0
+    }
 
     init {
-        println("Hello, media")
+        counter++
+        println("Media #$counter")
     }
 }

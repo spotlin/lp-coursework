@@ -11,5 +11,10 @@ fun main () {
 
 
     val newMedia = Media("Get Lucky", 1, 1.2, 2013)
+    val newMedia1 = Media("Get Lucky", 1, 1.2, 2013)
+    val newMedia2 = Media("Get Lucky", 1, 1.2, 2013)
+    val newMedia3 = Media("Get Lucky", 1, 1.2, 2013)
+    val newMedia5 = Media("Get Lucky", 1, 1.2, 2013)
+    val newMedia6 = Media("Get Lucky", 1, 1.2, 2013)
 
 }
