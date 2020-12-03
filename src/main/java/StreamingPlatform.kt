@@ -17,7 +17,14 @@ class StreamingPlatform (private var platformName: String) {
     // List all users
     fun listUsers() : Unit {
         for (user in users) {
-            println(user.getUserName())
+            // 'is' replaces Java's instanceof
+            if (user is Subscriber) {
+                println("Subscriber: ${user.getUserName()}")
+            }
+
+            else {
+                println("USER: ${user.getUserName()}")
+            }
         }
     }
 
@@ -50,11 +57,35 @@ class StreamingPlatform (private var platformName: String) {
                         var userType = splitRow.get(1)
                         var username = splitRow.get(2)
 
-                        // Instantiate a new user
-                        var newUser = User(username, userID.toInt())
+                        // TODO: replace cascade 'if' with 'when'
+                        if (userType.equals("U")) {
+                            // Instantiate a new user
+                            var newUser = Subscriber(username, userID.toInt())
 
-                        // Add to platform
-                        addUser(newUser)
+                            // Add to platform
+                            addUser(newUser)
+                        }
+
+                        else if (userType.equals("P")) {
+//                            // Instantiate a new user
+//                            var newUser = User(username, userID.toInt())
+//
+//                            // Add to platform
+//                            addUser(newUser)
+
+                            println("Do nothing yet. Podcaster.")
+                        }
+
+                        else if (userType.equals("A")) {
+                            // Instantiate a new user
+//                            var newUser = User(username, userID.toInt())
+
+                            // Add to platform
+//                            addUser(newUser)
+                            println("Do nothing yet. Artist.")
+
+                        }
+
                     }
 
                 }
