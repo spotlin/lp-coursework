@@ -25,6 +25,14 @@ class StreamingPlatform (private var platformName: String) {
             else if (user is Artist){
                 println("Artist: ${user.getUserName()}")
             }
+
+            else if (user is Podcaster){
+                println("Podcaster: ${user.getUserName()}")
+            }
+
+            else {
+                println("UNDEFINED: ${user.getUserName()}")
+            }
         }
     }
 
@@ -67,13 +75,10 @@ class StreamingPlatform (private var platformName: String) {
                         }
 
                         else if (userType == "P") {
-//                            // Instantiate a new user
-//                            var newUser = User(username, userID.toInt())
+                            var newUser = Podcaster(username, userID.toInt())
 //
-//                            // Add to platform
-//                            addUser(newUser)
-
-                            println("Do g yet. Podcaster.")
+                            // Add to platform
+                            addUser(newUser)
                         }
 
                         else if (userType == "A") {
