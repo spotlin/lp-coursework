@@ -73,7 +73,7 @@ class StreamingPlatform (private var platformName: String) {
 //                            // Add to platform
 //                            addUser(newUser)
 
-                            println("Do nothing yet. Podcaster.")
+                            println("Do g yet. Podcaster.")
                         }
 
                         else if (userType.equals("A")) {
