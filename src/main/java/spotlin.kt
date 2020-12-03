@@ -3,6 +3,7 @@ fun main () {
     println("Welcome to ${ spotlin.getPlatformName() }")
 
     spotlin.loadUsers("src/main/resources/usuarios.csv")
+    spotlin.listUsers()
 
 
 //    val user1 = Subscriber("Orion", 1)

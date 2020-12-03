@@ -39,14 +39,23 @@ class StreamingPlatform (private var platformName: String) {
 
         csvReader().open(usersFile) {
             readAllAsSequence().forEach { row ->
-                //Do something
                 if (firstLine) {
-                    println("First line: $row")
                     firstLine = false
                 }
 
                 else {
-                    println(row) //[a, b, c]
+                    for (elem in row) {
+                        var splitRow = (elem.split(';'))
+                        var userID = splitRow.get(0)
+                        var userType = splitRow.get(1)
+                        var username = splitRow.get(2)
+
+                        // Instantiate a new user
+                        var newUser = User(username, userID.toInt())
+
+                        // Add to platform
+                        addUser(newUser)
+                    }
 
                 }
             }
