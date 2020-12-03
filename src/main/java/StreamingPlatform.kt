@@ -22,8 +22,8 @@ class StreamingPlatform (private var platformName: String) {
                 println("Subscriber: ${user.getUserName()}")
             }
 
-            else {
-                println("USER: ${user.getUserName()}")
+            else if (user is Artist){
+                println("Artist: ${user.getUserName()}")
             }
         }
     }
@@ -58,7 +58,7 @@ class StreamingPlatform (private var platformName: String) {
                         var username = splitRow.get(2)
 
                         // TODO: replace cascade 'if' with 'when'
-                        if (userType.equals("U")) {
+                        if (userType == "U") {
                             // Instantiate a new user
                             var newUser = Subscriber(username, userID.toInt())
 
@@ -66,7 +66,7 @@ class StreamingPlatform (private var platformName: String) {
                             addUser(newUser)
                         }
 
-                        else if (userType.equals("P")) {
+                        else if (userType == "P") {
 //                            // Instantiate a new user
 //                            var newUser = User(username, userID.toInt())
 //
@@ -76,13 +76,12 @@ class StreamingPlatform (private var platformName: String) {
                             println("Do g yet. Podcaster.")
                         }
 
-                        else if (userType.equals("A")) {
+                        else if (userType == "A") {
                             // Instantiate a new user
-//                            var newUser = User(username, userID.toInt())
+                            var newUser = Artist(username, userID.toInt())
 
                             // Add to platform
-//                            addUser(newUser)
-                            println("Do nothing yet. Artist.")
+                            addUser(newUser)
 
                         }
 
