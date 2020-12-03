@@ -50,15 +50,13 @@ class StreamingPlatform (private var platformName: String) {
 
     // Load users from CSV file
     fun loadUsers(usersFile: String): Unit {
-        var firstLine : Boolean = true
+        var firstLine: Boolean = true
 
         csvReader().open(usersFile) {
             readAllAsSequence().forEach { row ->
                 if (firstLine) {
                     firstLine = false
-                }
-
-                else {
+                } else {
                     for (elem in row) {
                         var splitRow = (elem.split(';'))
                         var userID = splitRow.get(0)
@@ -72,16 +70,12 @@ class StreamingPlatform (private var platformName: String) {
 
                             // Add to platform
                             addUser(newUser)
-                        }
-
-                        else if (userType == "P") {
+                        } else if (userType == "P") {
                             var newUser = Podcaster(username, userID.toInt())
 //
                             // Add to platform
                             addUser(newUser)
-                        }
-
-                        else if (userType == "A") {
+                        } else if (userType == "A") {
                             // Instantiate a new user
                             var newUser = Artist(username, userID.toInt())
 
@@ -91,6 +85,61 @@ class StreamingPlatform (private var platformName: String) {
                         }
 
                     }
+
+                }
+            }
+        }
+    }
+
+    // Load favorites from CSV file
+    fun loadFavorites(favoritesFile: String): Unit {
+        var firstLine: Boolean = true
+
+        csvReader {delimiter = ';'}.open(favoritesFile) {
+            readAllAsSequence().forEach { row ->
+                if (firstLine) {
+                    firstLine = false
+                } else {
+
+                    var userID = row.toString().substringBefore(',').replace("[", "")
+                    var userFavorites = row.toString().substringAfter(',').replace("]", "")
+                    if (userFavorites != " ") {
+                        println(userFavorites)
+                    }
+
+                    else {
+                        // This user has no favorites
+                    }
+//                    for (elem in row) {
+//                            var splitRow = (elem.split(','))
+
+//                            var userCode = splitRow.get(0)
+//                            var userFavorites = splitRow.get(1)
+
+//                        println("$elem")
+//
+//                            // TODO: replace cascade 'if' with 'when'
+//                            if (userType == "U") {
+//                                // Instantiate a new user
+//                                var newUser = Subscriber(username, userID.toInt())
+//
+//                                // Add to platform
+//                                addUser(newUser)
+//                            } else if (userType == "P") {
+//                                var newUser = Podcaster(username, userID.toInt())
+////
+//                                // Add to platform
+//                                addUser(newUser)
+//                            } else if (userType == "A") {
+//                                // Instantiate a new user
+//                                var newUser = Artist(username, userID.toInt())
+//
+//                                // Add to platform
+//                                addUser(newUser)
+//
+//                            }
+
+//                    }
 
                 }
             }
