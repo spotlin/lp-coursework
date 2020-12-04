@@ -196,8 +196,8 @@ class StreamingPlatform (private var platformName: String) {
                     when (mediaType) {
                         // Add to Song class
                         "M" -> {
-                            // TODO: associate proper Genre to each media
                             var newSong = genre?.let { Song(mediaName, mediaCode.toInt(), mediaLength.toDouble(), mediaReleaseYear.toInt(), it) }
+                            // Add null-check
                             if (newSong != null) {
                                 addMedia(newSong)
                             }
@@ -205,8 +205,11 @@ class StreamingPlatform (private var platformName: String) {
 
                         // Add to Podcast class
                         "P" -> {
-                            var newPodcast = Podcast(mediaName, mediaCode.toInt(), mediaLength.toDouble(), mediaReleaseYear.toInt(), Genre("Comedy", "CO"), mediaSeason.toInt())
-                            addMedia(newPodcast)
+                            var newPodcast = genre?.let { Podcast(mediaName, mediaCode.toInt(), mediaLength.toDouble(), mediaReleaseYear.toInt(), it, mediaSeason.toInt()) }
+                            // Add null-check
+                            if (newPodcast != null) {
+                                addMedia(newPodcast)
+                            }
                         }
 
                         else -> {
@@ -294,6 +297,8 @@ class StreamingPlatform (private var platformName: String) {
                         // Check if media is Song or Podcast *
                         var mediaType = checkMediaType(media)
                         var mediaID = media.getMediaId()
+                        var mediaGenre = media.getMediaGenre().getGenre()
+                        var mediaLength = media.getMediaLength()
                     }
 
                 }
