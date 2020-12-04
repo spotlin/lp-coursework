@@ -102,6 +102,28 @@ class StreamingPlatform (private var platformName: String) {
         }
     }
 
+    fun loadMedia(mediaFile: String): Unit {
+        var firstLine: Boolean = true
+
+        csvReader {delimiter = ';'}.open(mediaFile) {
+            readAllAsSequence().forEach { row ->
+                if (firstLine) {
+                    firstLine = false
+                } else {
+                    for (elem in row) {
+//                        var splitRow = (elem.split(';'))
+//                        var userID = splitRow.get(0)
+//                        var userType = splitRow.get(1)
+//                        var username = splitRow.get(2)
+                        print("$elem ")
+                    }
+                    println()
+                    
+                }
+            }
+        }
+    }
+
     // Load favorites from CSV file
     fun loadFavorites(favoritesFile: String): Unit {
         var firstLine: Boolean = true
@@ -139,7 +161,7 @@ class StreamingPlatform (private var platformName: String) {
                             (user as Subscriber).addFavorite(newMedia)
                         }
 
-                        (user as Subscriber).printFavorites()
+//                        (user as Subscriber).printFavorites()
 
                         // Add to MutableList
 

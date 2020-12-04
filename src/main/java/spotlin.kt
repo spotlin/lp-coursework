@@ -3,7 +3,7 @@ fun main () {
     println("Welcome to ${ spotlin.getPlatformName() }")
 
     spotlin.loadUsers("src/main/resources/usuarios.csv")
-
+    spotlin.loadMedia("src/main/resources/midias.csv")
     spotlin.loadFavorites("src/main/resources/favoritos.csv")
 //    spotlin.listUsers()
 
