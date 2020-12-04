@@ -130,6 +130,8 @@ class StreamingPlatform (private var platformName: String) {
                             (user as Subscriber).addFavorite(newMedia)
                         }
 
+                        (user as Subscriber).printFavorites()
+
 
                         // Add to MutableList
 

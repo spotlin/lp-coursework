@@ -10,8 +10,9 @@ class Subscriber (username: String, userID: Int): User (username = username, use
 
     fun printFavorites(): Unit {
             for (media in favorites) {
-                println(media.getMediaName())
+                print("${media.getMediaId()} ")
             }
+            println()
         }
 
 

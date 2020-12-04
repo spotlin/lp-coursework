@@ -4,6 +4,10 @@ open class Media(protected var title: String, protected var mediaID: Int, protec
         return this.title
     }
 
+    public fun getMediaId() : Int {
+        return this.mediaID
+    }
+
     // Replaces Java static keyword
     companion object {
         var counter : Int = 0
