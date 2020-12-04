@@ -7,7 +7,12 @@ fun main () {
     spotlin.loadMedia("src/main/resources/midias.csv")
     spotlin.loadFavorites("src/main/resources/favoritos.csv")
 
-    spotlin.listGenres()
+
+    spotlin.generateFavoritesReport()
+
+//    spotlin.listGenres()
+
+
 //    spotlin.listMedia()
 //    spotlin.listUsers()
 

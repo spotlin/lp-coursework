@@ -11,6 +11,27 @@ class StreamingPlatform (private var platformName: String) {
     private var media: MutableList<Media> = mutableListOf()
     private var genres: MutableList<Genre> = mutableListOf()
 
+
+    /* General functions */
+
+    private fun checkMediaType(media: Media) : String {
+        return when (media) {
+            is Song -> {
+                "Song"
+            }
+
+            is Podcast -> {
+                "Podcast"
+            }
+
+            else -> {
+                // Throw error
+                ""
+            }
+        }
+
+    }
+
     /* Adding to platform */
 
     // Add an user
@@ -171,10 +192,7 @@ class StreamingPlatform (private var platformName: String) {
                     mediaLength = mediaLength.replace(",", ".")
 
                     // Get reference to Genre object
-//                    println(mediaGenre.substringBefore(","))
                     val genre = getGenreByAcronym(mediaGenre.substringBefore(","))
-//                    println("${genre?.getGenreAcronyms()}: ${genre?.getGenre()}")
-                    // Check media type to add media to appropriate class
                     when (mediaType) {
                         // Add to Song class
                         "M" -> {
@@ -258,17 +276,43 @@ class StreamingPlatform (private var platformName: String) {
     // Generate list of favorite media by user report
     fun generateFavoritesReport() : Unit {
 
-        // Get userID
+        // Traverse through each user
+            for (user in users) {
+                // Get reference to user by userID
+                var user = getUserByID(user.getUserId())
 
-        // Get media type
+                // Check if User is Subscriber
+                if (user is Subscriber) {
+                    // Get user ID *
+                    val userID = user.getUserId()
 
-        // Get media ID
+                    // Get user favorites
+                    var userFavorites = user.getFavorites()
 
-        // Get media genre
+                    // Traverse through user favorites
+                    for (media in userFavorites) {
+                        // Check if media is Song or Podcast *
+                        var mediaType = checkMediaType(media)
+                        var mediaID = media.getMediaId()
+                    }
 
-        // Get media length
+                }
 
-        // Write to CSV
+
+                // Traverse through user favorites
+
+                // Get media type
+
+                // Get media ID
+
+                // Get media genre
+
+                // Get media length
+
+                // Write to CSV
+            }
+
+
 
 
     }

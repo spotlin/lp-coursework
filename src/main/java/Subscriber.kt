@@ -6,7 +6,9 @@ class Subscriber (username: String, userID: Int): User (username = username, use
         favorites.add(newFavorite)
     }
 
-    // TODO: add removeFavorite method
+    fun getFavorites() : MutableList<Media> {
+        return favorites
+    }
 
     fun printFavorites(): Unit {
             print("$username ")
@@ -14,7 +16,9 @@ class Subscriber (username: String, userID: Int): User (username = username, use
                 print("${media.getMediaId()} ")
             }
             println()
-        }
+    }
+
+
 
 
 }
