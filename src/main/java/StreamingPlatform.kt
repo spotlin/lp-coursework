@@ -146,7 +146,8 @@ class StreamingPlatform (private var platformName: String) {
 
                         // Add to Podcast class
                         "P" -> {
-                            println("Not yet, podcast")
+                            var newPodcast = Podcast(mediaName, mediaCode.toInt(), mediaLength.toDouble(), mediaReleaseYear.toInt(), Genre("Comedy", "CO"), mediaSeason.toInt())
+                            addMedia(newPodcast)
                         }
 
                         else -> {
