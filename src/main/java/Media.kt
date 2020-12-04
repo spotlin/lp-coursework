@@ -12,8 +12,8 @@ open class Media(protected var title: String, protected var mediaID: Int, protec
         return this.genre
     }
 
-    fun getMediaLength() : Genre {
-        return this.genre
+    fun getLength() : Double {
+        return this.mediaLength
     }
 
     // Replaces Java static keyword

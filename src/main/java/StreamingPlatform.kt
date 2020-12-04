@@ -11,13 +11,12 @@ class StreamingPlatform (private var platformName: String) {
     private var media: MutableList<Media> = mutableListOf()
     private var genres: MutableList<Genre> = mutableListOf()
 
-
     /* General functions */
 
     private fun checkMediaType(media: Media) : String {
         return when (media) {
             is Song -> {
-                "Song"
+                "Música"
             }
 
             is Podcast -> {
@@ -298,7 +297,11 @@ class StreamingPlatform (private var platformName: String) {
                         var mediaType = checkMediaType(media)
                         var mediaID = media.getMediaId()
                         var mediaGenre = media.getMediaGenre().getGenre()
-                        var mediaLength = media.getMediaLength()
+                        var mediaLength = media.getLength()
+
+//                        var csvFirstRow = "CódigoAssinante;Tipo Mídia;Código Mídia;Gênero;Duração"
+//                        writeToCSV(csvFirstRow, )
+                        println("$userID $mediaType $mediaID $mediaGenre $mediaLength")
                     }
 
                 }
@@ -316,9 +319,5 @@ class StreamingPlatform (private var platformName: String) {
 
                 // Write to CSV
             }
-
-
-
-
     }
 }
