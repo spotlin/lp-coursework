@@ -20,6 +20,11 @@ class StreamingPlatform (private var platformName: String) {
         return users.find {it.getUserId() == userID}
     }
 
+    // Get media by ID
+    fun getMediaByID(mediaID: Int) : Media? {
+        return media.find {it.getMediaId() == mediaID}
+    }
+
     // List all users
     fun listUsers() : Unit {
         for (user in users) {
@@ -121,9 +126,13 @@ class StreamingPlatform (private var platformName: String) {
                         // Traverse this array and add each media separately
                         for (favoriteMedia in userFavoritesArray) {
                             // TODO: load media CSV file
+
                             // TODO: Get media by ID
+
+                            // Remove remaining whitespace from CSV
                             var favMediaNoWhiteSpace = favoriteMedia.filter { !it.isWhitespace() }
-//                            print("$favMediaNoWhiteSpace ")
+
+                            // Create new instance of media
                             var newMedia = Media("Get Lucky", favMediaNoWhiteSpace.toInt(), 3.14, 2019)
 
                             // Associate favorite media with user
@@ -131,7 +140,6 @@ class StreamingPlatform (private var platformName: String) {
                         }
 
                         (user as Subscriber).printFavorites()
-
 
                         // Add to MutableList
 
