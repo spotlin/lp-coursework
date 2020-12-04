@@ -4,8 +4,10 @@ fun main () {
 
     spotlin.loadUsers("src/main/resources/usuarios.csv")
     spotlin.loadMedia("src/main/resources/midias.csv")
+    spotlin.loadGenres("src/main/resources/generos.csv")
     spotlin.loadFavorites("src/main/resources/favoritos.csv")
 
+    spotlin.listGenres()
 //    spotlin.listMedia()
 //    spotlin.listUsers()
 

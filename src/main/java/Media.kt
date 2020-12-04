@@ -1,10 +1,10 @@
 open class Media(protected var title: String, protected var mediaID: Int, protected var mediaLength: Double, protected var releaseYear: Int ){
 
-    public fun getMediaName() : String {
+    fun getMediaName() : String {
         return this.title
     }
 
-    public fun getMediaId() : Int {
+    fun getMediaId() : Int {
         return this.mediaID
     }
 
@@ -16,7 +16,4 @@ open class Media(protected var title: String, protected var mediaID: Int, protec
     init {
         counter++
     }
-
-
-
 }

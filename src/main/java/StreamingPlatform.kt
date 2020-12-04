@@ -9,6 +9,7 @@ class StreamingPlatform (private var platformName: String) {
 
     private var users: MutableList<User> = mutableListOf()
     private var media: MutableList<Media> = mutableListOf()
+    private var genres: MutableList<Genre> = mutableListOf()
 
     /* Adding to platform */
 
@@ -17,10 +18,17 @@ class StreamingPlatform (private var platformName: String) {
         users.add(newUser)
     }
 
+    // Add a genre
+    fun addGenre(newGenre: Genre): Unit {
+        genres.add(newGenre)
+    }
+
     // Add a media
     fun addMedia(newMedia: Media): Unit {
         media.add(newMedia)
     }
+
+
 
     /* Getting a reference to the object */
 
@@ -58,6 +66,13 @@ class StreamingPlatform (private var platformName: String) {
         }
     }
 
+    // List all genres
+    fun listGenres(): Unit {
+        for (genre in genres) {
+            println(genre.getGenre())
+        }
+    }
+
 
     // List all media
     fun listMedia(): Unit {
@@ -65,7 +80,6 @@ class StreamingPlatform (private var platformName: String) {
             println(element.getMediaName())
         }
     }
-
 
     /* Loading files */
 
@@ -102,7 +116,6 @@ class StreamingPlatform (private var platformName: String) {
 
                             // Add user to platform
                             addUser(newUser)
-
                         }
 
                     }
@@ -111,6 +124,24 @@ class StreamingPlatform (private var platformName: String) {
             }
         }
     }
+
+    fun loadGenres(mediaFile: String): Unit {
+        var firstLine: Boolean = true
+
+        csvReader {delimiter = ';'}.open(mediaFile) {
+            readAllAsSequence().forEach { row ->
+                if (firstLine) {
+                    firstLine = false
+                } else {
+                    var newGenre = Genre(row[1], row[0])
+                    addGenre(newGenre)
+                }
+            }
+
+        }
+    }
+
+
 
     fun loadMedia(mediaFile: String): Unit {
         var firstLine: Boolean = true
@@ -198,7 +229,7 @@ class StreamingPlatform (private var platformName: String) {
                             }
                         }
 
-                        (user as Subscriber).printFavorites()
+//                        (user as Subscriber).printFavorites()
                     }
 
                     else {
@@ -209,4 +240,23 @@ class StreamingPlatform (private var platformName: String) {
         }
     }
 
+    /* Generating reports */
+
+    // Generate list of favorite media by user report
+    fun generateFavoritesReport() : Unit {
+
+        // Get userID
+
+        // Get media type
+
+        // Get media ID
+
+        // Get media genre
+
+        // Get media length
+
+        // Write to CSV
+
+
+    }
 }
