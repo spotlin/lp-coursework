@@ -37,6 +37,11 @@ class StreamingPlatform (private var platformName: String) {
         return users.find {it.getUserId() == userID}
     }
 
+    // Get genre by acronym
+    fun getGenreByAcronym(acronym : String) : Genre? {
+        return genres.find {it.getGenreAcronyms() == acronym}
+    }
+
     // Get media by ID
     fun getMediaByID(mediaID: Int) : Media? {
         return media.find {it.getMediaId() == mediaID}
@@ -165,14 +170,19 @@ class StreamingPlatform (private var platformName: String) {
                     // Turn mediaLength into double
                     mediaLength = mediaLength.replace(",", ".")
 
+                    // Get reference to Genre object
+//                    println(mediaGenre.substringBefore(","))
+                    val genre = getGenreByAcronym(mediaGenre.substringBefore(","))
+//                    println("${genre?.getGenreAcronyms()}: ${genre?.getGenre()}")
                     // Check media type to add media to appropriate class
                     when (mediaType) {
                         // Add to Song class
                         "M" -> {
-                            // TODO: load genre file
                             // TODO: associate proper Genre to each media
-                            var newSong = Song(mediaName, mediaCode.toInt(), mediaLength.toDouble(), mediaReleaseYear.toInt(), Genre("Rock", "RO"))
-                            addMedia(newSong)
+                            var newSong = genre?.let { Song(mediaName, mediaCode.toInt(), mediaLength.toDouble(), mediaReleaseYear.toInt(), it) }
+                            if (newSong != null) {
+                                addMedia(newSong)
+                            }
                         }
 
                         // Add to Podcast class
@@ -186,6 +196,9 @@ class StreamingPlatform (private var platformName: String) {
 
                         }
                     }
+
+
+
 
                 }
             }
@@ -219,7 +232,7 @@ class StreamingPlatform (private var platformName: String) {
                             // Remove remaining whitespace from CSV
                             var favMediaNoWhiteSpace = favoriteMedia.filter { !it.isWhitespace() }
 
-                            // TODO: Get reference to favorite media by ID
+                            // Get reference to favorite media by ID
                             var media = getMediaByID(favMediaNoWhiteSpace.toInt())
 
                             // Associate favorite media with user
