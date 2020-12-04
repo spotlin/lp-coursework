@@ -284,9 +284,13 @@ class StreamingPlatform (private var platformName: String) {
             var newRow = listOf("CódigoAssinante", "Tipo Mídia", "Código Mídia", "Gênero", "Duração")
             writeRow(newRow)
 
+            // Sort users by user ID (ascending)
+            var sortedUsers = users.sorted()
+
             // Traverse through each user
-            for (user in users) {
+            for (user in sortedUsers) {
                 // Get reference to user by userID
+                println(user.getUserId())
                 var user = getUserByID(user.getUserId())
 
                 // Check if User is Subscriber
