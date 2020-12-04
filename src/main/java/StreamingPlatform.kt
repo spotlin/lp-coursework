@@ -1,5 +1,6 @@
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import java.io.File
+import kotlin.reflect.KClass
 
 class StreamingPlatform (private var platformName: String) {
     fun getPlatformName(): String {
@@ -110,12 +111,24 @@ class StreamingPlatform (private var platformName: String) {
                     var userFavorites = row.toString().substringAfter(',').replace("]", "")
 
                     // If Subscriber : User has favorites...
-                    if (userFavorites != " ") {
+                    if (userFavorites != " " && userFavorites != "") {
                         // Get Subscriber by ID from StreamingPlatform
                         var user = getUserByID(userID.toInt())
-                        
 
-                        println("User ${user?.getUserName()} favorites are: $userFavorites")
+                        // Create array from userFavorites CSV row
+                        var userFavoritesArray = userFavorites.split(",").toTypedArray()
+
+                        // Traverse this array and add each media separately
+                        for (favoriteMedia in userFavoritesArray) {
+                            // TODO: load media CSV file
+                            // TODO: Get media by ID
+                            var favMediaNoWhiteSpace = favoriteMedia.filter { !it.isWhitespace() }
+//                            print("$favMediaNoWhiteSpace ")
+                            var newMedia = Media("Get Lucky", favMediaNoWhiteSpace.toInt(), 3.14, 2019)
+
+                            // Associate favorite media with user
+                            (user as Subscriber).addFavorite(newMedia)
+                        }
 
 
                         // Add to MutableList

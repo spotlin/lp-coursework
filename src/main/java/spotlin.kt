@@ -6,7 +6,7 @@ fun main () {
 
 
     spotlin.loadFavorites("src/main/resources/favoritos.csv")
-    spotlin.listUsers()
+//    spotlin.listUsers()
 
 //    val user1 = Subscriber("Orion", 1)
 //    spotlin.addUser(user1)
