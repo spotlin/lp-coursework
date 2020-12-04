@@ -10,10 +10,19 @@ class StreamingPlatform (private var platformName: String) {
     private var users: MutableList<User> = mutableListOf()
     private var media: MutableList<Media> = mutableListOf()
 
+    /* Adding to platform */
+
     // Add an user
     fun addUser(newUser: User): Unit {
         users.add(newUser)
     }
+
+    // Add a media
+    fun addMedia(newMedia: Media): Unit {
+        media.add(newMedia)
+    }
+
+    /* Getting a reference to the object */
 
     // Get user by ID
     fun getUserByID(userID : Int) : User? {
@@ -24,6 +33,8 @@ class StreamingPlatform (private var platformName: String) {
     fun getMediaByID(mediaID: Int) : Media? {
         return media.find {it.getMediaId() == mediaID}
     }
+
+    /* Listing data structures */
 
     // List all users
     fun listUsers() : Unit {
@@ -47,10 +58,6 @@ class StreamingPlatform (private var platformName: String) {
         }
     }
 
-    // Add media
-    fun addMedia(newMedia: Media): Unit {
-        media.add(newMedia)
-    }
 
     // List all media
     fun listMedia(): Unit {
@@ -58,6 +65,9 @@ class StreamingPlatform (private var platformName: String) {
             println(element.getMediaName())
         }
     }
+
+
+    /* Loading files */
 
     // Load users from CSV file
     fun loadUsers(usersFile: String): Unit {
@@ -90,7 +100,7 @@ class StreamingPlatform (private var platformName: String) {
                             // Instantiate a new user
                             var newUser = Artist(username, userID.toInt())
 
-                            // Add to platform
+                            // Add user to platform
                             addUser(newUser)
 
                         }
@@ -110,17 +120,41 @@ class StreamingPlatform (private var platformName: String) {
                 if (firstLine) {
                     firstLine = false
                 } else {
-                    var mediaCode = row.get(0)
-                    var mediaName = row.get(1)
-                    var mediaType = row.get(2)
-                    var mediaProducers = row.get(3)
-                    var mediaLength = row.get(4)
-                    var mediaGenre = row.get(5)
-                    var mediaSeason = row.get(6)
-                    var mediaAlbum = row.get(7)
-                    var mediaAlbumCode = row.get(8)
-                    var mediaReleaseYear = row.get(9)
-                    
+                    var mediaCode = row[0]
+                    var mediaName = row[1]
+                    var mediaType = row[2]
+                    var mediaProducers = row[3]
+                    var mediaLength = row[4]
+                    var mediaGenre = row[5]
+                    var mediaSeason = row[6]
+                    var mediaAlbum = row[7]
+                    var mediaAlbumCode = row[8]
+                    var mediaReleaseYear = row[9]
+
+                    // Turn mediaLength into double
+                    mediaLength = mediaLength.replace(",", ".")
+
+                    // Check media type to add media to appropriate class
+                    when (mediaType) {
+                        // Add to Song class
+                        "M" -> {
+                            // TODO: load genre file
+                            // TODO: associate proper Genre to each media
+                            var newSong = Song(mediaName, mediaCode.toInt(), mediaLength.toDouble(), mediaReleaseYear.toInt(), Genre("Rock", "RO"))
+                            addMedia(newSong)
+                        }
+
+                        // Add to Podcast class
+                        "P" -> {
+                            println("Not yet, podcast")
+                        }
+
+                        else -> {
+                            // Throw error
+
+                        }
+                    }
+
                 }
             }
         }

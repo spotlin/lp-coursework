@@ -5,6 +5,8 @@ fun main () {
     spotlin.loadUsers("src/main/resources/usuarios.csv")
     spotlin.loadMedia("src/main/resources/midias.csv")
     spotlin.loadFavorites("src/main/resources/favoritos.csv")
+
+    spotlin.listMedia()
 //    spotlin.listUsers()
 
 //    val user1 = Subscriber("Orion", 1)
