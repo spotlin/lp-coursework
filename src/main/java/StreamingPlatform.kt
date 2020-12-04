@@ -184,61 +184,26 @@ class StreamingPlatform (private var platformName: String) {
 
                         // Traverse this array and add each media separately
                         for (favoriteMedia in userFavoritesArray) {
-                            // TODO: load media CSV file
-
-                            // TODO: Get media by ID
 
                             // Remove remaining whitespace from CSV
                             var favMediaNoWhiteSpace = favoriteMedia.filter { !it.isWhitespace() }
 
-                            // Create new instance of media
-                            var newMedia = Media("Get Lucky", favMediaNoWhiteSpace.toInt(), 3.14, 2019)
+                            // TODO: Get reference to favorite media by ID
+                            var media = getMediaByID(favMediaNoWhiteSpace.toInt())
 
                             // Associate favorite media with user
-                            (user as Subscriber).addFavorite(newMedia)
+                            // Check if media exists in catalogue
+                            if (media != null) {
+                                (user as Subscriber).addFavorite(media)
+                            }
                         }
 
-//                        (user as Subscriber).printFavorites()
-
-                        // Add to MutableList
-
-//                        println(userFavorites)
+                        (user as Subscriber).printFavorites()
                     }
 
                     else {
                         // This user has no favorites
                     }
-//                    for (elem in row) {
-//                            var splitRow = (elem.split(','))
-
-//                            var userCode = splitRow.get(0)
-//                            var userFavorites = splitRow.get(1)
-
-//                        println("$elem")
-//
-//                            // TODO: replace cascade 'if' with 'when'
-//                            if (userType == "U") {
-//                                // Instantiate a new user
-//                                var newUser = Subscriber(username, userID.toInt())
-//
-//                                // Add to platform
-//                                addUser(newUser)
-//                            } else if (userType == "P") {
-//                                var newUser = Podcaster(username, userID.toInt())
-////
-//                                // Add to platform
-//                                addUser(newUser)
-//                            } else if (userType == "A") {
-//                                // Instantiate a new user
-//                                var newUser = Artist(username, userID.toInt())
-//
-//                                // Add to platform
-//                                addUser(newUser)
-//
-//                            }
-
-//                    }
-
                 }
             }
         }

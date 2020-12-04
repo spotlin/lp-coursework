@@ -9,6 +9,7 @@ class Subscriber (username: String, userID: Int): User (username = username, use
     // TODO: add removeFavorite method
 
     fun printFavorites(): Unit {
+            print("$username ")
             for (media in favorites) {
                 print("${media.getMediaId()} ")
             }
