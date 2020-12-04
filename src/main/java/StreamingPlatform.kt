@@ -1,4 +1,5 @@
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
+import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
 import java.io.File
 import kotlin.reflect.KClass
 
@@ -277,8 +278,13 @@ class StreamingPlatform (private var platformName: String) {
 
     // Generate list of favorite media by user report
     fun generateFavoritesReport() : Unit {
+        // Create CSV file in which the report will be written
+        csvWriter {delimiter = ';'}.open("3-favoritos.csv") {
+            // Create CSV header
+            var newRow = listOf("CódigoAssinante", "Tipo Mídia", "Código Mídia", "Gênero", "Duração")
+            writeRow(newRow)
 
-        // Traverse through each user
+            // Traverse through each user
             for (user in users) {
                 // Get reference to user by userID
                 var user = getUserByID(user.getUserId())
@@ -295,15 +301,16 @@ class StreamingPlatform (private var platformName: String) {
                     for (media in userFavorites) {
                         // Check if media is Song or Podcast *
                         var mediaType = checkMediaType(media)
+
+                        // Add remaining data
                         var mediaID = media.getMediaId()
                         var mediaGenre = media.getMediaGenre().getGenre()
                         var mediaLength = media.getLength()
 
-//                        var csvFirstRow = "CódigoAssinante;Tipo Mídia;Código Mídia;Gênero;Duração"
-//                        writeToCSV(csvFirstRow, )
-                        println("$userID $mediaType $mediaID $mediaGenre $mediaLength")
+                        // Create row with data
+                        var newRow = listOf("$userID", "$mediaType", "$mediaID", "$mediaGenre", "$mediaLength")
+                        writeRow(newRow)
                     }
-
                 }
 
 
@@ -319,5 +326,7 @@ class StreamingPlatform (private var platformName: String) {
 
                 // Write to CSV
             }
+        }
     }
+
 }
