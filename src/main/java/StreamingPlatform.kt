@@ -290,7 +290,6 @@ class StreamingPlatform (private var platformName: String) {
             // Traverse through each user
             for (user in sortedUsers) {
                 // Get reference to user by userID
-                println(user.getUserId())
                 var user = getUserByID(user.getUserId())
 
                 // Check if User is Subscriber
@@ -301,8 +300,17 @@ class StreamingPlatform (private var platformName: String) {
                     // Get user favorites
                     var userFavorites = user.getFavorites()
 
+                    // Sort user favorites: 1. by type; 2. by ID
+                    var userFavoritesSorted = userFavorites.sortedWith(
+                            compareBy(
+                                    {it is Podcast},
+                                    {it.getMediaId()}
+                            )
+                    )
+
                     // Traverse through user favorites
-                    for (media in userFavorites) {
+                    for (media in userFavoritesSorted) {
+                        println("${media.getMediaId()}: ${media.getMediaName()}")
                         // Check if media is Song or Podcast *
                         var mediaType = checkMediaType(media)
 
@@ -315,7 +323,11 @@ class StreamingPlatform (private var platformName: String) {
                         var newRow = listOf("$userID", "$mediaType", "$mediaID", "$mediaGenre", "$mediaLength")
                         writeRow(newRow)
                     }
+
+                    println()
                 }
+
+
 
 
                 // Traverse through user favorites
