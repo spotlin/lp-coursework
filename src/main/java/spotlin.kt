@@ -2,10 +2,11 @@ fun main () {
     val spotlin = StreamingPlatform("Spotlin")
     println("Welcome to ${ spotlin.getPlatformName() }")
 
-//    spotlin.loadUsers("src/main/resources/usuarios.csv")
-//    spotlin.listUsers()
+    spotlin.loadUsers("src/main/resources/usuarios.csv")
+
 
     spotlin.loadFavorites("src/main/resources/favoritos.csv")
+    spotlin.listUsers()
 
 //    val user1 = Subscriber("Orion", 1)
 //    spotlin.addUser(user1)

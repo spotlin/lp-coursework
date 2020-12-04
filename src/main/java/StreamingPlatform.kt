@@ -14,6 +14,11 @@ class StreamingPlatform (private var platformName: String) {
         users.add(newUser)
     }
 
+    // Get user by ID
+    fun getUserByID(userID : Int) : User? {
+        return users.find {it.getUserId() == userID}
+    }
+
     // List all users
     fun listUsers() : Unit {
         for (user in users) {
@@ -103,8 +108,19 @@ class StreamingPlatform (private var platformName: String) {
 
                     var userID = row.toString().substringBefore(',').replace("[", "")
                     var userFavorites = row.toString().substringAfter(',').replace("]", "")
+
+                    // If Subscriber : User has favorites...
                     if (userFavorites != " ") {
-                        println(userFavorites)
+                        // Get Subscriber by ID from StreamingPlatform
+                        var user = getUserByID(userID.toInt())
+                        
+
+                        println("User ${user?.getUserName()} favorites are: $userFavorites")
+
+
+                        // Add to MutableList
+
+//                        println(userFavorites)
                     }
 
                     else {
