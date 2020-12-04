@@ -110,14 +110,16 @@ class StreamingPlatform (private var platformName: String) {
                 if (firstLine) {
                     firstLine = false
                 } else {
-                    for (elem in row) {
-//                        var splitRow = (elem.split(';'))
-//                        var userID = splitRow.get(0)
-//                        var userType = splitRow.get(1)
-//                        var username = splitRow.get(2)
-                        print("$elem ")
-                    }
-                    println()
+                    var mediaCode = row.get(0)
+                    var mediaName = row.get(1)
+                    var mediaType = row.get(2)
+                    var mediaProducers = row.get(3)
+                    var mediaLength = row.get(4)
+                    var mediaGenre = row.get(5)
+                    var mediaSeason = row.get(6)
+                    var mediaAlbum = row.get(7)
+                    var mediaAlbumCode = row.get(8)
+                    var mediaReleaseYear = row.get(9)
                     
                 }
             }
