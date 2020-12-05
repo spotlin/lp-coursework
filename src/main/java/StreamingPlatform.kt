@@ -33,34 +33,34 @@ class StreamingPlatform (private var platformName: String) {
     /* Adding to platform */
 
     // Add an user
-    fun addUser(newUser: User) {
+    private fun addUser(newUser: User) {
         users.add(newUser)
     }
 
     // Add a genre
-    fun addGenre(newGenre: Genre) {
+    private fun addGenre(newGenre: Genre) {
         genres.add(newGenre)
     }
 
     // Add a media
-    fun addMedia(newMedia: Media) {
+    private fun addMedia(newMedia: Media) {
         media.add(newMedia)
     }
 
     /* Getting a reference to the object */
 
     // Get user by ID
-    fun getUserByID(userID : Int) : User? {
+    private fun getUserByID(userID : Int) : User? {
         return users.find {it.getUserId() == userID}
     }
 
     // Get genre by acronym
-    fun getGenreByAcronym(acronym : String) : Genre? {
+    private fun getGenreByAcronym(acronym : String) : Genre? {
         return genres.find {it.getGenreAcronyms() == acronym}
     }
 
     // Get media by ID
-    fun getMediaByID(mediaID: Int) : Media? {
+    private fun getMediaByID(mediaID: Int) : Media? {
         return media.find {it.getMediaId() == mediaID}
     }
 
@@ -70,20 +70,22 @@ class StreamingPlatform (private var platformName: String) {
     fun listUsers(){
         for (user in users) {
             // 'is' replaces Java's instanceof
-            if (user is Subscriber) {
-                println("Subscriber: ${user.getUserName()}")
-            }
+            when (user) {
+                is Subscriber -> {
+                    println("Subscriber: ${user.getUserName()}")
+                }
 
-            else if (user is Artist){
-                println("Artist: ${user.getUserName()}")
-            }
+                is Artist -> {
+                    println("Artist: ${user.getUserName()}")
+                }
 
-            else if (user is Podcaster){
-                println("Podcaster: ${user.getUserName()}")
-            }
+                is Podcaster -> {
+                    println("Podcaster: ${user.getUserName()}")
+                }
 
-            else {
-                println("UNDEFINED: ${user.getUserName()}")
+                else -> {
+                    println("UNDEFINED: ${user.getUserName()}")
+                }
             }
         }
     }
@@ -147,7 +149,7 @@ class StreamingPlatform (private var platformName: String) {
         }
     }
 
-    fun loadGenres(mediaFile: String): Unit {
+    fun loadGenres(mediaFile: String) {
         var firstLine = true
 
         csvReader {delimiter = ';'}.open(mediaFile) {
@@ -155,7 +157,7 @@ class StreamingPlatform (private var platformName: String) {
                 if (firstLine) {
                     firstLine = false
                 } else {
-                    var newGenre = Genre(row[1], row[0])
+                    val newGenre = Genre(row[1], row[0])
                     addGenre(newGenre)
                 }
             }
@@ -165,8 +167,8 @@ class StreamingPlatform (private var platformName: String) {
 
 
 
-    fun loadMedia(mediaFile: String): Unit {
-        var firstLine: Boolean = true
+    fun loadMedia(mediaFile: String) {
+        var firstLine = true
 
         csvReader {delimiter = ';'}.open(mediaFile) {
             readAllAsSequence().forEach { row ->
@@ -299,8 +301,8 @@ class StreamingPlatform (private var platformName: String) {
                     // Sort user favorites: 1. by type; 2. by ID
                     val userFavoritesSorted = userFavorites.sortedWith(
                             compareBy(
-                                    {it is Podcast},
-                                    {it.getMediaId()}
+                                    { it is Podcast },
+                                    { it.getMediaId() }
                             )
                     )
 
@@ -320,21 +322,6 @@ class StreamingPlatform (private var platformName: String) {
                     }
 
                 }
-
-
-
-
-                // Traverse through user favorites
-
-                // Get media type
-
-                // Get media ID
-
-                // Get media genre
-
-                // Get media length
-
-                // Write to CSV
             }
         }
     }
