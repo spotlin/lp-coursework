@@ -4,4 +4,8 @@ open class Producer (username: String, userID: Int): User (username = username, 
     public fun assignMedia(newMedia : Int) {
         media.add(newMedia)
     }
+
+    public fun getMedia() : MutableList<Int> {
+        return this.media
+    }
 }

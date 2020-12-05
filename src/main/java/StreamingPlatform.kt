@@ -33,8 +33,6 @@ class StreamingPlatform (private var platformName: String) {
         for (producer in producers) {
             var user = getUserByID(producer.toInt())
             (user as Producer).assignMedia(mediaID)
-
-            println("Assigning media ${getMediaByID(mediaID)?.getMediaName()} to ${user.getUserName()}")
         }
     }
 
@@ -344,46 +342,35 @@ class StreamingPlatform (private var platformName: String) {
             val newRow = listOf("NomeProdutor", "NomeMídia")
             writeRow(newRow)
 
-            // Sort users by user ID (ascending)
-            val sortedUsers = users.sorted()
+            // Sort producers by name (ascending)
+            val producers = users.filterIsInstance<Producer>()
+            val sortedProducers = producers.sortedBy { it.getUserName() }
 
-            // Traverse through each user
-            for (user in sortedUsers) {
+            // Traverse through each User that is a producer
+            for (producer in sortedProducers) {
                 // Get reference to user by userID
-                val user = getUserByID(user.getUserId())
 
-                // Check if User is Subscriber
-                if (user is Subscriber) {
-                    // Get user ID *
-                    val userID = user.getUserId()
+                val producerMedia = producer.getMedia()
 
-                    // Get user favorites
-                    val userFavorites = user.getFavorites()
-
-                    // Sort user favorites: 1. by type; 2. by ID
-                    val userFavoritesSorted = userFavorites.sortedWith(
-                            compareBy(
-                                    { it is Podcast },
-                                    { it.getMediaId() }
-                            )
-                    )
-
-                    // Traverse through user favorites
-                    for (media in userFavoritesSorted) {
-                        // Check if media is Song or Podcast *
-                        val mediaType = checkMediaType(media)
-
-                        // Add remaining data
-                        val mediaID = media.getMediaId()
-                        val mediaGenre = media.getMediaGenre().getGenre()
-                        val mediaLength = media.getLength()
-
-                        // Create row with data
-                        val newRow = listOf("$userID", "$mediaType", "$mediaID", "$mediaGenre", "$mediaLength")
-                        writeRow(newRow)
+                var mediaByThisProducer = mutableListOf<Media>()
+                for (media in producerMedia) {
+                    var newMedia = getMediaByID(media)
+                    if (newMedia != null) {
+                        mediaByThisProducer.add(newMedia)
                     }
-
                 }
+
+                // Sort media by this producer in ascending order
+                var sortedMediaByThisProducer = mediaByThisProducer.sortedBy { it.getMediaName() }
+                var mediaListByName = mutableListOf<String>()
+                for (media in sortedMediaByThisProducer) {
+                    mediaListByName.add(media.getMediaName())
+                }
+
+                var mediaList = mediaListByName.toString().removePrefix("[").removeSuffix("]")
+
+                val newRow = listOf(producer.getUserName(), mediaList)
+                writeRow(newRow)
             }
         }
     }
