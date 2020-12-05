@@ -27,7 +27,15 @@ class StreamingPlatform (private var platformName: String) {
                 ""
             }
         }
+    }
 
+    private fun assignMediaToProducers(producers: Array<String>, mediaID: Int) {
+        for (producer in producers) {
+            var user = getUserByID(producer.toInt())
+            (user as Producer).assignMedia(mediaID)
+
+            println("Assigning media ${getMediaByID(mediaID)?.getMediaName()} to ${user.getUserName()}")
+        }
     }
 
     /* Adding to platform */
@@ -216,8 +224,10 @@ class StreamingPlatform (private var platformName: String) {
                         }
                     }
 
-
-
+                    // Assign media to producers
+                    mediaProducers = mediaProducers.filter { !it.isWhitespace() }
+                    val producersArray = mediaProducers.split(",").toTypedArray()
+                    assignMediaToProducers(producersArray, mediaCode.toInt())
 
                 }
             }
@@ -280,6 +290,58 @@ class StreamingPlatform (private var platformName: String) {
         csvWriter {delimiter = ';'}.open("3-favoritos.csv") {
             // Create CSV header
             val newRow = listOf("CódigoAssinante", "Tipo Mídia", "Código Mídia", "Gênero", "Duração")
+            writeRow(newRow)
+
+            // Sort users by user ID (ascending)
+            val sortedUsers = users.sorted()
+
+            // Traverse through each user
+            for (user in sortedUsers) {
+                // Get reference to user by userID
+                val user = getUserByID(user.getUserId())
+
+                // Check if User is Subscriber
+                if (user is Subscriber) {
+                    // Get user ID *
+                    val userID = user.getUserId()
+
+                    // Get user favorites
+                    val userFavorites = user.getFavorites()
+
+                    // Sort user favorites: 1. by type; 2. by ID
+                    val userFavoritesSorted = userFavorites.sortedWith(
+                            compareBy(
+                                    { it is Podcast },
+                                    { it.getMediaId() }
+                            )
+                    )
+
+                    // Traverse through user favorites
+                    for (media in userFavoritesSorted) {
+                        // Check if media is Song or Podcast *
+                        val mediaType = checkMediaType(media)
+
+                        // Add remaining data
+                        val mediaID = media.getMediaId()
+                        val mediaGenre = media.getMediaGenre().getGenre()
+                        val mediaLength = media.getLength()
+
+                        // Create row with data
+                        val newRow = listOf("$userID", "$mediaType", "$mediaID", "$mediaGenre", "$mediaLength")
+                        writeRow(newRow)
+                    }
+
+                }
+            }
+        }
+    }
+
+    // Generate list of media by artist
+    fun generateMediaByProducerReport() : Unit {
+        // Create CSV file in which the report will be written
+        csvWriter {delimiter = ';'}.open("2-produtores.csv") {
+            // Create CSV header
+            val newRow = listOf("NomeProdutor", "NomeMídia")
             writeRow(newRow)
 
             // Sort users by user ID (ascending)
